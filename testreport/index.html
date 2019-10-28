@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试报告</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <!-- <script src="vue.js"></script> -->
+    <style>
+        .list-group-item {
+            cursor: pointer;
+        }
+        
+        pre {
+            outline: 1px solid #ccc;
+            padding: 5px;
+            margin: 5px;
+        }
+        
+        .string {
+            color: green;
+        }
+        
+        .number {
+            color: darkorange;
+        }
+        
+        .boolean {
+            color: blue;
+        }
+        
+        .null {
+            color: magenta;
+        }
+        
+        .key {
+            color: red;
+        }
+    </style>
+</head>
+
+<body style="min-width: 1200px;width: 100%;" id="app">
+    <h1 class="text-center">测试报告
+        <b style="font-size:12px;"></b>
+    </h1>
+    <div class="text-right">
+        <button class="btn btn-primary mb-5 mr-5 mt-3">重新测试</button>
+    </div>
+    <div id="accordion">
+        <div class="err card ml-5 mr-5 mb-5">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-danger">
+                        测试出错
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show">
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">node1</div>
+                        <div class="card-body">
+                            <table class="table table-striped table-bordered w-100">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">测试项</th>
+                                        <th scope="col">状态</th>
+                                        <th scope="col">结果</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>smart</td>
+                                        <td>出错</td>
+                                        <td>mdomdomdomdomdomdo mdomdomdomdomdomdomdomdomdom domdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdomdo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pass card ml-5 mr-5 mb-5">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-success collapsed">
+                  测试通过
+                </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse show">
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">node1</div>
+                        <div class="card-body">
+                            <table class="table table-striped table-bordered w-100">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">测试项</th>
+                                        <th scope="col">状态</th>
+                                        <th scope="col">结果</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>etcd</td>
+                                        <td>通过</td>
+                                        <td>存在</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-5  ml-5 mr-5">
+        <div class="card-header">
+            <button class="btn btn-primary">Feature</button>
+        </div>
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header">
+                    node1
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal">loginAuthPf </li>
+                    <li class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal">hwDiskExtension </li>
+                    <li class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal">memoryUsageWithoutCache </li>
+                    <li class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal">1000/10000NetworkRates</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <pre class="modal-body">
+                    ...
+                </pre>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="jquery.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script>
+    function syntaxHighlight(json) {
+        if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+        json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+    $('#exampleModal').find("modal-title").text('loginAuthPf');
+    $('#exampleModal').on('show.bs.modal', function(e) {
+        console.log(e);
+        $(this).find(".modal-title").text(e.relatedTarget.innerText);
+        var obj = [{
+            "name": "wo",
+            "age": 12
+        }]
+        $(this).find(".modal-body").html(syntaxHighlight(obj));
+        console.log($(e.relatedTarget).index());
+        // do something...
+    })
+    $.ajax({
+        url: 'getlist',
+        type: 'get',
+        success: function(data) {
+            console.log(JSON.parse(data));
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    })
+    new Vue({
+        el: '#app',
+        data: {
+            visible: false
+        },
+        methods: {
+            show: function() {
+                this.visible = true;
+            }
+        }
+    })
+</script>
+
+</html>

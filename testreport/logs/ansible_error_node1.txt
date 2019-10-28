@@ -1,0 +1,16 @@
+node_ip_check#pass#
+docker-ip-check#pass#
+ceph-status#pass#
+ceph-sc-check#pass#
+heapster#pass#
+docker_ceph_version#pass#
+system_ceph_version#fail#system ceph version is wrong
+ping_node1#pass#
+ping_node2#pass#
+ping_node3#fail#ping node3:172.16.60.13 from node1 fail
+ping_ceph_node1#pass#
+ping_ceph_node2#pass#
+ping_ceph_node3#fail#ping ceph_node3:192.168.60.13from ceph_node1 fail
+Smartctl#pass#
+etcd_service_check#fail#failed to check the health of member de0abd4a0309b0bc on https://172.16.60.13:2379: Get https://172.16.60.13:2379/health: dial tcp 172.16.60.13:2379: getsockopt: no route to host member de0abd4a0309b0bc is unreachable: [https://172.16.60.13:2379] are all unreachable
+kube-system-check#pass#
