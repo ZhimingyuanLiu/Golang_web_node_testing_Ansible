@@ -3,11 +3,11 @@ import (
 	"flag"
 	"fmt"
 	"net"
-	"../github.com/spf13/pflag"
+	"./github.com/spf13/pflag"
 	// "fmt"
 	"net/http"
 	"os"
-	"../testreport/handler"
+	"./testreport/handler"
 	// "strings"
 	"log"
 )
